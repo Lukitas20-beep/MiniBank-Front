@@ -109,6 +109,10 @@ export default function Register() {
                 color="white"
                 _hover={{ bg: '#006400' }}
                 width="100%"
+                onClick={() => {
+                    // Aqui você pode adicionar a lógica de registro
+                    navigate('/login')
+                }}
             >
                 Cadastrar
             </Button>

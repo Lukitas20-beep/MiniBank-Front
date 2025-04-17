@@ -80,6 +80,10 @@ export default function Login() {
                 color="white"
                 _hover={{ bg: '#006400' }} // hover opcional
                 width="100%"
+                onClick={() => {
+                    // Aqui você pode adicionar a lógica de autenticação
+                    navigate('/dashboard')
+                }}
             >
                 Login
             </Button>
