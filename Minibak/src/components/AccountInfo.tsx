@@ -11,7 +11,7 @@ const isMobile = useBreakpointValue({ base: true, md: false })
 
 return (
     <Box
-        bg="gray.100"
+        bg="white"
         py={6}
         px={6}
         borderRadius="md"
