@@ -13,6 +13,7 @@ import {
 import { FaSearch, FaQuestionCircle, FaBell } from 'react-icons/fa'
 import { MdTextIncrease, MdTextDecrease } from 'react-icons/md'
 import { FiMenu } from 'react-icons/fi'
+import { useNavigate } from 'react-router-dom'
 
 interface HeaderProps {
     onOpenMenu: () => void
@@ -20,6 +21,8 @@ interface HeaderProps {
 
 const Header = ({ onOpenMenu }: HeaderProps) => {
     const isMobile = useBreakpointValue({ base: true, md: false })
+
+    const navigate = useNavigate()
 
     return (
         <Flex
@@ -33,7 +36,13 @@ const Header = ({ onOpenMenu }: HeaderProps) => {
             position="relative"
         >
             {/* Logo centralizado */}
-            <Text fontSize="2xl" fontWeight="bold" textAlign="center">
+            <Text
+                fontSize="2xl"
+                fontWeight="bold"
+                textAlign="center"
+                cursor="pointer"
+                onClick={() => navigate('/login')}
+            >
                 <Text as="span" color="white">Mini</Text>
                 <Text as="span" color="#008000">Bank</Text>
             </Text>
