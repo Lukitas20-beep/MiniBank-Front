@@ -1,11 +1,18 @@
 import {
     Box,
     VStack,
-    HStack,
     Icon,
-    Text
-} from '@chakra-ui/react'
-import {
+    Text,
+    useBreakpointValue,
+    IconButton,
+    useDisclosure,
+    Drawer,
+    DrawerOverlay,
+    DrawerContent,
+    DrawerCloseButton,
+    DrawerBody
+  } from '@chakra-ui/react'
+  import {
     FaHome,
     FaMoneyBillWave,
     FaExchangeAlt,
@@ -13,35 +20,78 @@ import {
     FaCreditCard,
     FaHandHoldingUsd,
     FaEllipsisH,
-} from 'react-icons/fa'
-
-const SidebarItem = ({ icon, label }: { icon: any; label: string }) => (
-    <HStack spacing={3} color="gray.700" _hover={{ color: "black", cursor: "pointer" }}>
-        <Icon as={icon} />
-        <Text>{label}</Text>
-    </HStack>
-)
-
-const Sidebar = () => {
-    return (
-        <Box w="250px" bg="white" p={4} boxShadow="md">
-        <Text as="span" color="Black" fontSize="2xl" fontWeight="bold">
-                Mini
-            </Text>
-            <Text as="span" color="#008000" fontSize="2xl" fontWeight="bold">
-                Bank
-            </Text>
-        <VStack spacing={4} align="start" fontSize="sm">
-            <SidebarItem icon={FaHome} label="Home" />
-            <SidebarItem icon={FaMoneyBillWave} label="Conta Corrente" />
-            <SidebarItem icon={FaExchangeAlt} label="Transferências" />
-            <SidebarItem icon={FaFileInvoice} label="Pagamentos" />
-            <SidebarItem icon={FaCreditCard} label="Cartões" />
-            <SidebarItem icon={FaHandHoldingUsd} label="Empréstimos" />
-            <SidebarItem icon={FaEllipsisH} label="Outros" />
-        </VStack>
+    FaBars
+  } from 'react-icons/fa'
+  import { IconType } from 'react-icons'
+  
+  interface SidebarItemProps {
+    icon: IconType;
+    label: string;
+  }
+  
+  const SidebarItem = ({ icon, label }: SidebarItemProps) => (
+    <VStack spacing={1} color="gray.600" _hover={{ color: "black", cursor: "pointer" }}>
+      <Icon as={icon} boxSize={6} />
+      <Text fontSize="sm" textAlign="center">{label}</Text>
+    </VStack>
+  )
+  
+  const SidebarContent = () => (
+    <Box
+      w="15vh"
+      bg="gray.50"
+      py={6}
+      px={2}
+      minH="100vh"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+    >
+      <VStack spacing={8}>
+        <SidebarItem icon={FaHome} label="Home" />
+        <SidebarItem icon={FaMoneyBillWave} label="Conta Corrente" />
+        <SidebarItem icon={FaExchangeAlt} label="Transferências" />
+        <SidebarItem icon={FaFileInvoice} label="Pagamentos" />
+        <SidebarItem icon={FaCreditCard} label="Cartões" />
+        <SidebarItem icon={FaHandHoldingUsd} label="Empréstimos" />
+        <SidebarItem icon={FaEllipsisH} label="Outros" />
+      </VStack>
     </Box>
+  )
+  
+  const Sidebar = () => {
+    const isDesktop = useBreakpointValue({ base: false, md: true })
+    const { isOpen, onOpen, onClose } = useDisclosure()
+  
+    if (isDesktop) {
+      return <SidebarContent />
+    }
+  
+    return (
+      <>
+        <IconButton
+          aria-label="Abrir menu"
+          icon={<FaBars />}
+          onClick={onOpen}
+          position="fixed"
+          top="1rem"
+          left="1rem"
+          zIndex="overlay"
+          variant="ghost"
+          colorScheme="gray"
+        />
+  
+        <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
+          <DrawerOverlay />
+          <DrawerContent>
+            <DrawerCloseButton />
+            <DrawerBody p={0}>
+              <SidebarContent />
+            </DrawerBody>
+          </DrawerContent>
+        </Drawer>
+      </>
     )
-}
-
-export default Sidebar
+  }
+  
+  export default Sidebar
