@@ -1,36 +1,40 @@
 import {
     Box,
     Flex,
-  } from '@chakra-ui/react'
-  
-  import Sidebar from '../components/Sidebar'
-  import Header from '../components/Header'
-  import StatusCards from '../components/StatusCards'
-  import CardSelection from '../components/CardSelection'
-  import PaymentOption from '../components/PaymentOption'
-  import PaymentDate from '../components/PaymentDate'
-  
-  const Dashboard = () => {
+} from '@chakra-ui/react'
+
+import Sidebar from '../components/Sidebar'
+import Header from '../components/Header'
+import StatusCards from '../components/StatusCards'
+import CardSelection from '../components/CardSelection'
+import PaymentOption from '../components/PaymentOption'
+import PaymentDate from '../components/PaymentDate'
+import AccountInfo from '../components/AccountInfo'
+
+const Dashboard = () => {
     return (
-      <Box minH="100vh" bg="gray.100">
+    <Box minH="100vh" bg="gray.100">
         <Box position="fixed" top="0" left="0" right="0" zIndex="1000">
-          <Header />
+            <Header />
         </Box>
-  
+
         <Flex pt="64px">
-          <Sidebar />
-  
-          <Box ml={{ base: 0, md: '80px' }} flex="1" p={6}>
+            <Sidebar />
+
+        
+
+        <Box ml={{ base: 0, md: '0' }} flex="1" p={6}>
+            <AccountInfo name="{name}" agency="{agc}" account="{ac}}" />
             <StatusCards />
             <Flex gap={4} mt={6} flexWrap="wrap">
-              <CardSelection />
-              <PaymentOption />
-              <PaymentDate />
+                <CardSelection />
+                <PaymentOption />
+                <PaymentDate />
             </Flex>
-          </Box>
+        </Box>
         </Flex>
-      </Box>
+    </Box>
     )
-  }
-  
-  export default Dashboard
+}
+
+export default Dashboard
