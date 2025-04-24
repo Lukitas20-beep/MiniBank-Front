@@ -20,7 +20,7 @@ import {
     FaEllipsisH,
 } from 'react-icons/fa'
 import { IconType } from 'react-icons'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 interface SidebarItemProps {
     icon: IconType
@@ -36,16 +36,20 @@ interface SidebarProps {
 
 const SidebarItem = ({ icon, label, path, onClick }: SidebarItemProps) => {
     const navigate = useNavigate()
+    const location = useLocation()
+
+    const isActive = location.pathname === path
 
     const handleClick = () => {
         navigate(path)
-        if (onClick) onClick() // Fecha o drawer no mobile
+        if (onClick) onClick()
     }
 
     return (
         <VStack
             spacing={1}
-            color="gray.600"
+            color={isActive ? '#008000' : 'gray.600'}
+            fontWeight={isActive ? 'bold' : 'normal'}
             _hover={{ color: 'black', cursor: 'pointer' }}
             onClick={handleClick}
         >
