@@ -34,7 +34,7 @@ const Dashboard = () => {
     const cards = ['Cartão final 0000', 'Cartão final 1234']
 
     return (
-        <Box minH="100vh" bg="white">
+        <Box minH="100vh" bg="gray.50">
             {/* Header fixo com controle de menu */}
             <Box position="fixed" top="0" left="0" right="0" zIndex="1000">
                 <Header onOpenMenu={onOpen} />
