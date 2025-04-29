@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import Login from './pages/Login' // vamos criar em seguida
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
+import ManagerDashboard from './pages/ManagerDashboard'; //Gerente
 import Transfers from './pages/Transfer';
 import Others from './pages/Others';
 import Payments from './pages/Payments';
@@ -18,6 +19,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/manager" element={<ManagerDashboard/>}/>
       <Route path="/transferencias" element={<Transfers />} />
       <Route path="/outros" element={<Others />} />
       <Route path="/pagamentos" element={<Payments />} />
