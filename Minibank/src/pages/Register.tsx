@@ -9,6 +9,7 @@ import {
     Image,
     Flex,
     useColorModeValue,
+    Select,
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
@@ -18,6 +19,7 @@ import registerImage from '/Bank.png'
 export default function Register() {
     const navigate = useNavigate()
     const [cpf, setCpf] = useState('')
+    const [userType, setUserType] = useState<'cliente' | 'gerente'>('cliente')
 
     function formatCpf(value: string) {
         const onlyNums = value.replace(/\D/g, '')
@@ -85,9 +87,19 @@ export default function Register() {
                     </Heading>
 
                     <VStack spacing={4} align="stretch" w="100%" maxW="sm">
-                        <Input placeholder="Nome Completo" variant="filled" />
+                        <Select
+                            placeholder="Selecione o tipo de usuário"
+                            value={userType}
+                            onChange={(e) => setUserType(e.target.value as 'cliente' | 'gerente')}
+                            bg="gray.700"
+                            color="white"
+                            variant="filled"
+                        >
+                            <option value="cliente">Cliente</option>
+                            <option value="gerente">Gerente</option>
+                        </Select>
 
-                        {/* CPF com formatação manual */}
+                        <Input placeholder="Nome Completo" variant="filled" />
                         <Input
                             placeholder="CPF"
                             variant="filled"
@@ -95,7 +107,6 @@ export default function Register() {
                             onChange={handleCpfChange}
                             maxLength={14}
                         />
-
                         <Input
                             placeholder="Data de Nascimento"
                             type="date"
@@ -110,7 +121,8 @@ export default function Register() {
                             _hover={{ bg: '#006400' }}
                             width="100%"
                             onClick={() => {
-                                // Aqui você pode adicionar a lógica de registro
+                                // Aqui você pode adicionar a lógica de registro usando o valor de `userType`
+                                console.log('Tipo de usuário selecionado:', userType)
                                 navigate('/login')
                             }}
                         >

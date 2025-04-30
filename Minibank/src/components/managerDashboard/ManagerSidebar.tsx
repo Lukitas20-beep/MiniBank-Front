@@ -10,15 +10,7 @@ import {
     DrawerCloseButton,
     DrawerBody,
 } from '@chakra-ui/react'
-import {
-    FaHome,
-    FaMoneyBillWave,
-    FaExchangeAlt,
-    FaFileInvoice,
-    FaCreditCard,
-    FaHandHoldingUsd,
-    FaEllipsisH,
-} from 'react-icons/fa'
+import { FaHome, FaHandHoldingUsd } from 'react-icons/fa'
 import { IconType } from 'react-icons'
 import { useNavigate, useLocation } from 'react-router-dom'
 
@@ -71,18 +63,13 @@ const SidebarContent = ({ onClose }: { onClose?: () => void }) => (
         alignItems="center"
     >
         <VStack spacing={8}>
-            <SidebarItem icon={FaHome} label="Home" path="/dashboard" onClick={onClose} />
-            <SidebarItem icon={FaMoneyBillWave} label="Conta Corrente" path="/conta" onClick={onClose} />
-            <SidebarItem icon={FaExchangeAlt} label="Transferências" path="/transferencias" onClick={onClose} />
-            <SidebarItem icon={FaFileInvoice} label="Pagamentos" path="/pagamentos" onClick={onClose} />
-            <SidebarItem icon={FaCreditCard} label="Cartões" path="/cartoes" onClick={onClose} />
-            <SidebarItem icon={FaHandHoldingUsd} label="Empréstimos" path="/emprestimos" onClick={onClose} />
-            <SidebarItem icon={FaEllipsisH} label="Outros" path="/manager" onClick={onClose} />
+            <SidebarItem icon={FaHome} label="Home" path="/manager" onClick={onClose} />
+            <SidebarItem icon={FaHandHoldingUsd} label="Pedidos" path="/pedidos-emprestimos" onClick={onClose} />
         </VStack>
     </Box>
 )
 
-const Sidebar = ({ isOpen = false, onClose = () => { } }: SidebarProps) => {
+const ManagerSidebar = ({ isOpen = false, onClose = () => { } }: SidebarProps) => {
     const isDesktop = useBreakpointValue({ base: false, md: true })
 
     if (isDesktop) {
@@ -102,4 +89,4 @@ const Sidebar = ({ isOpen = false, onClose = () => { } }: SidebarProps) => {
     )
 }
 
-export default Sidebar
+export default ManagerSidebar

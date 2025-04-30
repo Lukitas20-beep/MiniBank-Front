@@ -5,14 +5,14 @@ import {
     useDisclosure,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
-import AccountInfo from "../components/AccountInfo";
-import LoanCard from "../components/LoanCard";
-import LoanTabSelector from "../components/LoanTabSelector";
-import LoanRequestStep from "../components/LoanRequestStep";
-import LoanConfirmationStep from "../components/LoanConfirmationStep";
-import LoanSuccessStep from "../components/LoanSuccessStep";
+import Header from "../../components/Header";
+import Sidebar from "../../components/Sidebar";
+import AccountInfo from "../../components/dashboard/AccountInfo";
+import LoanCard from "../../components/lending/LoanCard";
+import LoanTabSelector from "../../components/lending/LoanTabSelector";
+import LoanRequestStep from "../../components/lending/LoanRequestStep";
+import LoanConfirmationStep from "../../components/lending/LoanConfirmationStep";
+import LoanSuccessStep from "../../components/lending/LoanSuccessStep";
 
 type FormData = {
     amount: string;
@@ -108,7 +108,8 @@ const Lending = () => {
                 <Box ml={{ base: 0, md: "0" }} flex="1" px={{ base: 4, md: 8 }} py={6}>
                     <AccountInfo name={name} agency={ag} account={ac} />
 
-                    <Box my={6}>
+                    {/* Alinhamento central no mobile */}
+                    <Flex justify={{ base: "center", md: "flex-start" }} my={6}>
                         <LoanTabSelector
                             selectedTab={selectedTab}
                             onSelect={(tab) => {
@@ -116,7 +117,7 @@ const Lending = () => {
                                 setStep(1);
                             }}
                         />
-                    </Box>
+                    </Flex>
 
                     {renderStep()}
                 </Box>

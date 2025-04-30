@@ -35,7 +35,7 @@ const LoanRequestStep = ({ onSubmit }: Props) => {
     };
 
     return (
-        <Box bg="white" p={[4, 6, 8]} rounded="md" w="100%">
+        <Box bg="white" p={isMobile ? 4 : 8} rounded="md" w="100%">
             <VStack align="start" spacing={6}>
                 {/* Título e subtítulo */}
                 <Box>
@@ -47,7 +47,7 @@ const LoanRequestStep = ({ onSubmit }: Props) => {
 
                 {/* Etapas */}
                 <HStack
-                    spacing={[2, 4, 8]}
+                    spacing={isMobile ? 2 : 8}
                     fontSize="sm"
                     fontWeight="semibold"
                     color="gray.400"
@@ -68,8 +68,8 @@ const LoanRequestStep = ({ onSubmit }: Props) => {
 
                     <Stack spacing={4} w="100%">
                         <Flex
-                            direction={["column", "row"]}
-                            align={["start", "center"]}
+                            direction={isMobile ? "column" : "row"}
+                            align={isMobile ? "start" : "center"}
                             gap={4}
                         >
                             <Text minW="150px">Valor solicitado:</Text>
@@ -77,7 +77,7 @@ const LoanRequestStep = ({ onSubmit }: Props) => {
                                 <Input
                                     value={amount}
                                     onChange={(e) => setAmount(e.target.value)}
-                                    maxW={["100%", "200px"]}
+                                    maxW={isMobile ? "100%" : "200px"}
                                     textAlign="right"
                                 />
                                 <Text color="gray.600">(R$)</Text>
@@ -85,22 +85,22 @@ const LoanRequestStep = ({ onSubmit }: Props) => {
                         </Flex>
 
                         <Flex
-                            direction={["column", "row"]}
-                            align={["start", "center"]}
+                            direction={isMobile ? "column" : "row"}
+                            align={isMobile ? "start" : "center"}
                             gap={4}
                         >
                             <Text minW="150px">Quantidade de Parcelas:</Text>
                             <Input
                                 value={installments}
                                 onChange={(e) => setInstallments(e.target.value)}
-                                maxW={["100%", "200px"]}
+                                maxW={isMobile ? "100%" : "200px"}
                                 textAlign="center"
                             />
                         </Flex>
 
                         <Flex
-                            direction={["column", "row"]}
-                            align={["start", "center"]}
+                            direction={isMobile ? "column" : "row"}
+                            align={isMobile ? "start" : "center"}
                             gap={4}
                         >
                             <Text minW="150px">Data de Vencimento:</Text>
@@ -138,7 +138,7 @@ const LoanRequestStep = ({ onSubmit }: Props) => {
 
                 {/* Botões */}
                 <Flex
-                    direction={["column", "row"]}
+                    direction={isMobile ? "column" : "row"}
                     justify="end"
                     gap={4}
                     w="100%"
@@ -147,7 +147,7 @@ const LoanRequestStep = ({ onSubmit }: Props) => {
                     <Button
                         variant="outline"
                         size="lg"
-                        w={["100%", "auto"]}
+                        w={isMobile ? "100%" : "auto"}
                     >
                         Voltar
                     </Button>
@@ -157,7 +157,7 @@ const LoanRequestStep = ({ onSubmit }: Props) => {
                         size="lg"
                         _hover={{ bg: "gray.800" }}
                         onClick={handleSubmit}
-                        w={["100%", "auto"]}
+                        w={isMobile ? "100%" : "auto"}
                     >
                         Simular
                     </Button>

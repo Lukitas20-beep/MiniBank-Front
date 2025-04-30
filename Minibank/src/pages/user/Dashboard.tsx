@@ -5,13 +5,13 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react'
 
-import Sidebar from '../components/Sidebar'
-import Header from '../components/Header'
-import StatusCards from '../components/StatusCards'
-import CardSelection from '../components/CardSelection'
-import PaymentOption from '../components/PaymentOption'
-import PaymentDate from '../components/PaymentDate'
-import AccountInfo from '../components/AccountInfo'
+import Sidebar from '../../components/Sidebar'
+import Header from '../../components/Header'
+import StatusCards from '../../components/dashboard/StatusCards'
+import CardSelection from '../../components/dashboard/CardSelection'
+import PaymentOption from '../../components/dashboard/PaymentOption'
+import PaymentDate from '../../components/dashboard/PaymentDate'
+import AccountInfo from '../../components/dashboard/AccountInfo'
 
 const Dashboard = () => {
     const name = 'Arthur Campos'

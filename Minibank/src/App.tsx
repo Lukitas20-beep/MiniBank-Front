@@ -3,14 +3,15 @@ import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Login from './pages/Login' // vamos criar em seguida
 import Register from './pages/Register';
-import Dashboard from './pages/Dashboard';
-import ManagerDashboard from './pages/ManagerDashboard'; //Gerente
-import Transfers from './pages/Transfer';
-import Others from './pages/Others';
-import Payments from './pages/Payments';
-import Cards from './pages/Cards';
-import Lending from './pages/Lending';
-import CurrentAccount from './pages/CurrentAcconut';
+import Dashboard from './pages/user/Dashboard';
+import ManagerDashboard from './pages/manager/ManagerDashboard'; //Gerente
+import Transfers from './pages/user/Transfer';
+import Others from './pages/user/Others';
+import Payments from './pages/user/Payments';
+import Cards from './pages/user/Cards';
+import Lending from './pages/user/Lending';
+import CurrentAccount from './pages/user/CurrentAcconut';
+import LoanRequests from './pages/manager/LoanRequest';
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/manager" element={<ManagerDashboard/>}/>
+      <Route path="/manager" element={<ManagerDashboard />} />
+      <Route path="/pedidos-emprestimos" element={<LoanRequests />} />
       <Route path="/transferencias" element={<Transfers />} />
       <Route path="/outros" element={<Others />} />
       <Route path="/pagamentos" element={<Payments />} />
