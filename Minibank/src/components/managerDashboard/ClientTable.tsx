@@ -1,4 +1,4 @@
-// src/components/ClientTable.tsx
+// ClientTable.tsx
 import {
     Box,
     Table,
@@ -10,9 +10,17 @@ import {
     Stack,
     Text,
     useBreakpointValue,
+    Button,
+    Flex,
+    useDisclosure,
 } from '@chakra-ui/react'
+import { FaPlus } from 'react-icons/fa'
+import { ViewClientModal } from './ViewClientModal'
+import { EditClientModal } from './EditClientModal'
+import { AddClientModal } from './AddClientModal'
+import { useState } from 'react'
 
-interface Cliente {
+export interface Cliente {
     nome: string
     agencia: string
     conta: string
@@ -23,8 +31,37 @@ interface ClientTableProps {
     clientes: Cliente[]
 }
 
-export default function ClientTable({ clientes }: ClientTableProps) {
-    const isMobile = useBreakpointValue({ base: true, md: false })
+export default function ClientTable({ clientes: initialClientes }: ClientTableProps) {
+    const isMobile = useBreakpointValue({ base: true, md: false }) ?? false
+    const [clientes, setClientes] = useState<Cliente[]>(initialClientes)
+
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
+    const atualizarCliente = (index: number, novoCliente: Cliente) => {
+        const novos = [...clientes]
+        novos[index] = novoCliente
+        setClientes(novos)
+    }
+
+    const adicionarCliente = (novoCliente: Cliente) => {
+        setClientes([...clientes, novoCliente])
+        onClose()  // Fecha o modal após adicionar o cliente
+    }
+
+    const renderAddButton = () => (
+        <>
+            <Button
+                leftIcon={<FaPlus />}
+                colorScheme="green"
+                width="full"
+                mt={isMobile ? 2 : 0}
+                onClick={onOpen} // Abre o modal
+            >
+                Adicionar Cliente
+            </Button>
+            <AddClientModal isOpen={isOpen} onClose={onClose} onAdd={adicionarCliente} />
+        </>
+    )
 
     if (isMobile) {
         return (
@@ -32,50 +69,66 @@ export default function ClientTable({ clientes }: ClientTableProps) {
                 {clientes.map((cliente, i) => (
                     <Box
                         key={i}
-                        p={4}
-                        shadow="sm"
-                        rounded="md"
+                        p={5}
+                        shadow="md"
+                        rounded="lg"
                         bg="white"
                         border="1px solid"
                         borderColor="gray.200"
+                        transition="all 0.2s ease"
+                        _hover={{ shadow: 'lg', transform: 'scale(1.01)' }}
                     >
-                        <Text><strong>Nome:</strong> {cliente.nome}</Text>
-                        <Text><strong>Agência:</strong> {cliente.agencia}</Text>
-                        <Text><strong>Conta:</strong> {cliente.conta}</Text>
-                        <Text><strong>Saldo:</strong> {cliente.saldo}</Text>
+                        <Text fontSize="xl" fontWeight="bold" color="gray.900">
+                            {cliente.nome}
+                        </Text>
+                        <Text color="gray.700"><strong>Agência:</strong> {cliente.agencia}</Text>
+                        <Text color="gray.700"><strong>Conta:</strong> {cliente.conta}</Text>
+                        <Text mt={2} color="#008000" fontWeight="semibold"><strong>Saldo:</strong> {cliente.saldo}</Text>
+
+                        <Flex mt={4} gap={2}>
+                            <ViewClientModal cliente={cliente} />
+                            <EditClientModal cliente={cliente} onSave={(novo) => atualizarCliente(i, novo)} />
+                        </Flex>
                     </Box>
                 ))}
+                {renderAddButton()}
             </Stack>
         )
     }
 
     return (
-        <Box
-            bg="white"
-            rounded="md"
-            shadow="sm"
-            width="100%"
-        >
-            <Table variant="simple">
-                <Thead>
+        <Box bg="white" rounded="lg" shadow="md" p={6}>
+            <Table variant="simple" size="md">
+                <Thead bg="#008000">
                     <Tr>
-                        <Th>Nome</Th>
-                        <Th>Agência</Th>
-                        <Th>Conta</Th>
-                        <Th>Saldo</Th>
+                        <Th color="white">Nome</Th>
+                        <Th color="white">Agência</Th>
+                        <Th color="white">Conta</Th>
+                        <Th color="white">Saldo</Th>
+                        <Th color="white">Ações</Th>
                     </Tr>
                 </Thead>
                 <Tbody>
                     {clientes.map((c, i) => (
-                        <Tr key={i}>
+                        <Tr key={i} _hover={{ bg: 'gray.100' }}>
                             <Td>{c.nome}</Td>
                             <Td>{c.agencia}</Td>
                             <Td>{c.conta}</Td>
-                            <Td>{c.saldo}</Td>
+                            <Td color="#008000" fontWeight="semibold">{c.saldo}</Td>
+                            <Td>
+                                <Flex gap={2}>
+                                    <ViewClientModal cliente={c} />
+                                    <EditClientModal cliente={c} onSave={(novo) => atualizarCliente(i, novo)} />
+                                </Flex>
+                            </Td>
                         </Tr>
                     ))}
                 </Tbody>
             </Table>
+
+            <Box mt={6}>
+                {renderAddButton()}
+            </Box>
         </Box>
     )
 }

@@ -72,7 +72,7 @@ const SidebarContent = ({ onClose }: { onClose?: () => void }) => (
     >
         <VStack spacing={8}>
             <SidebarItem icon={FaHome} label="Home" path="/dashboard" onClick={onClose} />
-            <SidebarItem icon={FaMoneyBillWave} label="Conta Corrente" path="/conta" onClick={onClose} />
+            <SidebarItem icon={FaMoneyBillWave} label="Extrato" path="/extrato" onClick={onClose} />
             <SidebarItem icon={FaExchangeAlt} label="Transferências" path="/transferencias" onClick={onClose} />
             <SidebarItem icon={FaFileInvoice} label="Pagamentos" path="/pagamentos" onClick={onClose} />
             <SidebarItem icon={FaCreditCard} label="Cartões" path="/cartoes" onClick={onClose} />
