@@ -42,6 +42,17 @@ const Lending = () => {
     const handleFinish = () => {
         setStep(1);
         setSelectedTab("limite");
+        setFormData(null);
+    };
+
+    const handleSimulate = (amount: string) => {
+        setFormData({
+            amount,
+            installments: "",
+            dueDate: { day: "", month: "", year: "" }
+        });
+        setSelectedTab("emprestimo");
+        setStep(1);
     };
 
     const renderStep = () => {
@@ -49,7 +60,7 @@ const Lending = () => {
 
         switch (step) {
             case 1:
-                return <LoanRequestStep onSubmit={handleFormSubmit} />;
+                return <LoanRequestStep onSubmit={handleFormSubmit} initialAmount={formData?.amount} />;
             case 2:
                 return (
                     formData && (
@@ -86,12 +97,14 @@ const Lending = () => {
             flexWrap="wrap"
         >
             <LoanCard
-                amount="R$ 15.000,00"
+                amount="15000"
                 description="Para Você realizar novas conquistas de forma planejada, com parcelas que cabem no seu bolso."
+                onSimulate={() => handleSimulate("15000")}
             />
             <LoanCard
-                amount="R$ 1.500,00"
+                amount="1500"
                 description="Para Você utilizar em casos de imprevistos ou gastos inesperados."
+                onSimulate={() => handleSimulate("1500")}
             />
         </Stack>
     );
@@ -108,8 +121,7 @@ const Lending = () => {
                 <Box ml={{ base: 0, md: "0" }} flex="1" px={{ base: 4, md: 8 }} py={6}>
                     <AccountInfo name={name} agency={ag} account={ac} />
 
-                    {/* Alinhamento central no mobile */}
-                    <Flex justify={{ base: "center", md: "flex-start" }} my={6}>
+                    <Flex justify={{ base: "center", md: "flex-start" }} my={10}>
                         <LoanTabSelector
                             selectedTab={selectedTab}
                             onSelect={(tab) => {
@@ -118,7 +130,6 @@ const Lending = () => {
                             }}
                         />
                     </Flex>
-
                     {renderStep()}
                 </Box>
             </Flex>

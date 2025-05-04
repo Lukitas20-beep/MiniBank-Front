@@ -9,18 +9,31 @@ import {
     MenuItem,
     Button,
     Circle,
-} from '@chakra-ui/react'
-import { MdOutlineDone } from 'react-icons/md'
-import { ChevronDownIcon } from '@chakra-ui/icons'
+} from '@chakra-ui/react';
+import { MdOutlineDone } from 'react-icons/md';
+import { ChevronDownIcon } from '@chakra-ui/icons';
+import { useFontSize } from '../../context/FontSizeContext'; // ajuste o caminho se necessário
+
+interface AccountData {
+    label: string;
+    balance: number;
+}
+
+interface CardData {
+    label: string;
+    limit: number;
+}
 
 interface StatusCardsProps {
-    selectedAccount: string
-    accounts: string[]
-    onSelectAccount: (value: string) => void
-    selectedCard: string
-    cards: string[]
-    onSelectCard: (value: string) => void
-    statusLabel: string
+    selectedAccount: string;
+    accounts: AccountData[];
+    onSelectAccount: (value: string) => void;
+
+    selectedCard: string;
+    cards: CardData[];
+    onSelectCard: (value: string) => void;
+
+    statusLabel: string;
 }
 
 const StatusCards = ({
@@ -32,6 +45,11 @@ const StatusCards = ({
     onSelectCard,
     statusLabel,
 }: StatusCardsProps) => {
+    const currentAccount = accounts.find((a) => a.label === selectedAccount);
+    const currentCard = cards.find((c) => c.label === selectedCard);
+
+    const { fontSize } = useFontSize();
+
     return (
         <Flex
             direction={{ base: 'column', md: 'row' }}
@@ -39,75 +57,90 @@ const StatusCards = ({
             gap={4}
             wrap="wrap"
         >
-            {/* Cards Container */}
             <Flex direction={{ base: 'column', md: 'row' }} flex="1" gap={4}>
 
-                {/* Card de saldo disponível com menu */}
-                <Box flex="1" bg="white" p={5} rounded="md" boxShadow="sm">
-                    <Flex justify="space-between" align="center">
-                        <Text fontWeight="semibold" fontSize="lg">💲 {selectedAccount}</Text>
+                {/* Conta bancária */}
+                <Box
+                    flex="1"
+                    bg="white"
+                    borderWidth="1px"
+                    borderColor="gray.200"
+                    rounded="lg"
+                    p={4}
+                    _hover={{ boxShadow: 'md' }}
+                    transition="all 0.2s"
+                >
+                    <Flex justify="space-between" align="center" mb={1}>
+                        <Text fontWeight="medium" fontSize={fontSize} color="gray.700">
+                            💰 {selectedAccount}
+                        </Text>
                         <Menu>
                             <MenuButton
                                 as={Button}
-                                size="sm"
+                                size="xs"
                                 variant="ghost"
                                 rightIcon={<ChevronDownIcon />}
-                                fontSize="md"
-                                fontWeight="medium"
+                                fontSize={fontSize}
+                                fontWeight="normal"
                             />
                             <MenuList>
                                 {accounts.map((acc, i) => (
-                                    <MenuItem key={i} onClick={() => onSelectAccount(acc)} fontSize="md">
-                                        {acc}
+                                    <MenuItem key={i} onClick={() => onSelectAccount(acc.label)}>
+                                        {acc.label}
                                     </MenuItem>
                                 ))}
                             </MenuList>
                         </Menu>
                     </Flex>
+                    <Text fontSize="xs" color="gray.500">Saldo disponível:</Text>
+                    <Text fontSize={fontSize} fontWeight="semibold" color="green.500">
+                        R$ {currentAccount?.balance.toFixed(2)}
+                    </Text>
                 </Box>
 
-                {/* Card de cartão com menu */}
-                <Box flex="1" bg="blackAlpha.900" color="white" p={5} rounded="md" boxShadow="sm">
-                    <Flex justify="space-between" align="center">
-                        <Text fontWeight="semibold" fontSize="lg">{selectedCard}</Text>
+                {/* Cartão */}
+                <Box
+                    flex="1"
+                    bg="gray.900"
+                    color="white"
+                    borderWidth="1px"
+                    borderColor="gray.700"
+                    rounded="lg"
+                    p={4}
+                    _hover={{ boxShadow: 'md' }}
+                    transition="all 0.2s"
+                >
+                    <Flex justify="space-between" align="center" mb={1}>
+                        <Text fontWeight="medium" fontSize={fontSize}>
+                            {selectedCard}
+                        </Text>
                         <Menu>
                             <MenuButton
                                 as={Button}
-                                size="sm"
+                                size="xs"
                                 variant="ghost"
                                 color="whiteAlpha.800"
                                 rightIcon={<ChevronDownIcon />}
-                                fontSize="md"
-                                fontWeight="medium"
+                                fontSize={fontSize}
+                                fontWeight="normal"
                             />
                             <MenuList color="black">
                                 {cards.map((card, i) => (
-                                    <MenuItem key={i} onClick={() => onSelectCard(card)} fontSize="md">
-                                        {card}
+                                    <MenuItem key={i} onClick={() => onSelectCard(card.label)}>
+                                        {card.label}
                                     </MenuItem>
                                 ))}
                             </MenuList>
                         </Menu>
                     </Flex>
+                    <Text fontSize="xs" color="whiteAlpha.700">Limite disponível:</Text>
+                    <Text fontSize={fontSize} fontWeight="semibold" color="green.300">
+                        R$ {currentCard?.limit.toFixed(2)}
+                    </Text>
                 </Box>
             </Flex>
-
-            {/* Status - Preenchimento */}
-            <Flex
-                align="center"
-                gap={2}
-                direction={{ base: 'column', md: 'row' }}
-                justify={{ base: 'center', md: 'flex-start' }}
-            >
-                <Circle size="6" bg="green.500">
-                    <Icon as={MdOutlineDone} color="white" boxSize={4} />
-                </Circle>
-                <Text color="green.600" fontWeight="semibold" fontSize="lg">
-                    {statusLabel}
-                </Text>
-            </Flex>
         </Flex>
-    )
-}
+    );
+};
 
-export default StatusCards
+export default StatusCards;

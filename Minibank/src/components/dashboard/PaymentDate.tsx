@@ -1,27 +1,55 @@
-import { Box, Text, RadioGroup, Stack, Radio, Divider } from '@chakra-ui/react'
+import {
+    Box,
+    Text,
+    RadioGroup,
+    Stack,
+    Radio,
+    Divider,
+    useColorModeValue,
+} from '@chakra-ui/react';
+import { useFontSize } from '../../context/FontSizeContext'; // ajuste o caminho conforme necessário
 
 interface PaymentDateProps {
-    selectedDate: string
-    onChangeDate: (value: string) => void
+    selectedDate: string;
+    onChangeDate: (value: string) => void;
 }
 
 const PaymentDate = ({ selectedDate, onChangeDate }: PaymentDateProps) => {
+    const bgColor = useColorModeValue('white', 'gray.800');
+    const borderColor = useColorModeValue('blue.100', 'blue.300');
+    const labelColor = useColorModeValue('gray.500', 'gray.400');
+    const textColor = useColorModeValue('gray.800', 'white');
+
+    const { fontSize } = useFontSize(); // use o hook
+
     return (
-        <Box flex="1" bg="white" p={6} rounded="md" border="2px" borderColor="blue.400" boxShadow="md">
-            <Text color="gray.500" fontWeight="semibold" fontSize="lg" mb={4}>
+        <Box
+            flex="1"
+            bg={bgColor}
+            p={5}
+            rounded="2xl"
+            border="1px solid"
+            borderColor={borderColor}
+            boxShadow="sm"
+        >
+            <Text fontWeight="semibold" fontSize={fontSize} color={textColor} mb={3}>
                 Data de pagamento
             </Text>
 
             <Divider mb={4} />
 
             <RadioGroup value={selectedDate} onChange={onChangeDate}>
-                <Stack spacing={4}>
-                    <Radio value="hoje" fontWeight="bold">Pagar hoje</Radio>
-                    <Radio value="agendar" fontWeight="bold">Agendar para</Radio>
+                <Stack spacing={3}>
+                    <Radio value="hoje" fontWeight="medium" colorScheme="blue" fontSize={fontSize}>
+                        Pagar hoje
+                    </Radio>
+                    <Radio value="agendar" fontWeight="medium" colorScheme="blue" fontSize={fontSize}>
+                        Agendar para outra data
+                    </Radio>
                 </Stack>
             </RadioGroup>
         </Box>
-    )
-}
+    );
+};
 
-export default PaymentDate
+export default PaymentDate;

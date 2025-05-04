@@ -1,12 +1,23 @@
-import { Box, Divider, Text, RadioGroup, Stack, Radio } from '@chakra-ui/react'
+import {
+    Box,
+    Divider,
+    Text,
+    RadioGroup,
+    Stack,
+    Radio,
+    HStack,
+    VStack,
+    useColorModeValue,
+} from '@chakra-ui/react';
+import { useFontSize } from '../../context/FontSizeContext'; // ajuste o caminho conforme necessário
 
 interface CardSelectionProps {
-    cardName: string
-    cardEnd: string
-    totalValue: string
-    dueDate: string
-    selectedOption: string
-    onChangeOption: (value: string) => void
+    cardName: string;
+    cardEnd: string;
+    totalValue: string;
+    dueDate: string;
+    selectedOption: string;
+    onChangeOption: (value: string) => void;
 }
 
 const CardSelection = ({
@@ -15,35 +26,72 @@ const CardSelection = ({
     totalValue,
     dueDate,
     selectedOption,
-    onChangeOption
+    onChangeOption,
 }: CardSelectionProps) => {
+    const bgColor = useColorModeValue('white', 'gray.800');
+    const labelColor = useColorModeValue('gray.500', 'gray.400');
+    const valueColor = useColorModeValue('gray.800', 'white');
+
+    const { fontSize } = useFontSize(); // hook aqui
+
     return (
-        <Box flex="1" bg="white" p={6} rounded="md" boxShadow="md">
-            <Text color="gray.500" fontWeight="semibold" fontSize="lg" mb={4}>
+        <Box
+            flex="1"
+            bg={bgColor}
+            p={5}
+            rounded="2xl"
+            boxShadow="sm"
+            border="1px solid"
+            borderColor={useColorModeValue('gray.100', 'gray.700')}
+        >
+            <Text fontWeight="semibold" fontSize={fontSize} color={valueColor} mb={3}>
                 Escolher cartão
             </Text>
 
             <Divider mb={4} />
 
-            <Text fontSize="sm" color="gray.500">{cardName}</Text>
-            <Text fontWeight="bold" fontSize="md" mb={4}>FINAL: {cardEnd}</Text>
+            <VStack align="start" spacing={2}>
+                <Text fontSize={fontSize} color={labelColor}>
+                    {cardName}
+                </Text>
+                <Text fontWeight="bold" fontSize={fontSize} color={valueColor}>
+                    Final: **** {cardEnd}
+                </Text>
+            </VStack>
 
-            <Divider mb={4} />
+            <Divider my={4} />
 
-            <Text fontSize="sm" color="gray.500">Valor Total</Text>
-            <Text fontWeight="medium" fontSize="md">{totalValue}</Text>
-
-            <Text fontSize="sm" color="gray.500" mt={4}>Vencimento</Text>
-            <Text fontWeight="medium" fontSize="md">{dueDate}</Text>
+            <HStack justify="space-between" w="full" mb={2}>
+                <Box>
+                    <Text fontSize={fontSize} color={labelColor}>
+                        Valor Total
+                    </Text>
+                    <Text fontWeight="medium" fontSize={fontSize} color="green.500">
+                        {totalValue}
+                    </Text>
+                </Box>
+                <Box>
+                    <Text fontSize={fontSize} color={labelColor}>
+                        Vencimento
+                    </Text>
+                    <Text fontWeight="medium" fontSize={fontSize} color={valueColor}>
+                        {dueDate}
+                    </Text>
+                </Box>
+            </HStack>
 
             <RadioGroup mt={6} value={selectedOption} onChange={onChangeOption}>
                 <Stack spacing={3}>
-                    <Radio value="pagar" fontWeight="bold">Pagar fatura</Radio>
-                    <Radio value="parcelar" fontWeight="bold">Parcelar Fatura</Radio>
+                    <Radio value="pagar" fontWeight="medium" colorScheme="green" fontSize={fontSize}>
+                        Pagar fatura
+                    </Radio>
+                    <Radio value="parcelar" fontWeight="medium" colorScheme="green" fontSize={fontSize}>
+                        Parcelar fatura
+                    </Radio>
                 </Stack>
             </RadioGroup>
         </Box>
-    )
-}
+    );
+};
 
-export default CardSelection
+export default CardSelection;

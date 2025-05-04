@@ -12,6 +12,7 @@ import { MdTextIncrease, MdTextDecrease } from 'react-icons/md'
 import { FiMenu } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
 
+import { useFontSize } from '../context/FontSizeContext' // ✅ Import do contexto
 import SearchNavigation from './SearchNavigation'
 
 interface HeaderProps {
@@ -21,6 +22,8 @@ interface HeaderProps {
 const Header = ({ onOpenMenu }: HeaderProps) => {
     const isMobile = useBreakpointValue({ base: true, md: false })
     const navigate = useNavigate()
+
+    const { increaseFontSize, decreaseFontSize } = useFontSize() // ✅ Uso do contexto
 
     return (
         <Flex
@@ -69,8 +72,20 @@ const Header = ({ onOpenMenu }: HeaderProps) => {
             {/* Ícones lado direito */}
             {!isMobile && (
                 <HStack spacing={4} ml={4}>
-                    <Icon as={MdTextIncrease} fontSize="lg" cursor="pointer" />
-                    <Icon as={MdTextDecrease} fontSize="lg" cursor="pointer" />
+                    <Icon
+                        as={MdTextIncrease}
+                        fontSize="lg"
+                        cursor="pointer"
+                        onClick={increaseFontSize}
+                        title="Aumentar fonte"
+                    />
+                    <Icon
+                        as={MdTextDecrease}
+                        fontSize="lg"
+                        cursor="pointer"
+                        onClick={decreaseFontSize}
+                        title="Diminuir fonte"
+                    />
                     <Icon as={FaQuestionCircle} fontSize="lg" cursor="pointer" />
                     <Icon as={FaBell} fontSize="lg" cursor="pointer" />
                     <Avatar size="sm" name="Usuário" />

@@ -30,8 +30,16 @@ const Dashboard = () => {
     const [selectedCard, setSelectedCard] = useState('Cartão final 0000')
     const [statusLabel] = useState('Preenchimento')
 
-    const accounts = ['Saldo disponível', 'Conta Corrente', 'Conta Poupança']
-    const cards = ['Cartão final 0000', 'Cartão final 1234']
+    const accounts = [
+        { label: 'Saldo disponível', balance: 1542.75 },
+        { label: 'Conta Corrente', balance: 800.00 },
+        { label: 'Conta Poupança', balance: 1200.50 },
+    ]
+
+    const cards = [
+        { label: 'Cartão final 0000', limit: 2000.00 },
+        { label: 'Cartão final 1234', limit: 1500.00 },
+    ]
 
     return (
         <Box minH="100vh" bg="gray.50">
