@@ -96,19 +96,6 @@ export default function Register() {
                     </Heading>
 
                     <VStack spacing={4} align="stretch" w="100%" maxW="sm">
-                        <Select
-                            placeholder="Selecione o tipo de usuário"
-                            value={userType}
-                            onChange={(e) => setUserType(e.target.value as 'cliente' | 'gerente')}
-                            bg="gray.700"
-                            color="white"
-                            variant="filled"
-                            focusBorderColor="#008000"
-                        >
-                            <option value="cliente">Cliente</option>
-                            <option value="gerente">Gerente</option>
-                        </Select>
-
                         <Input
                             placeholder="Nome Completo"
                             variant="filled"
