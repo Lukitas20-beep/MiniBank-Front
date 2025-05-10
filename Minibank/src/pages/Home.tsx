@@ -14,29 +14,33 @@ return (
         py={10}
         px={4}
     >
-    <Box mb={6}>
-        <a href="https://github.com/Arthur5502/MiniBank-Front.git" target="_blank">
-            <Image src={viteLogo} alt="MiniBank Logo" boxSize="80px" mx="auto" />
-        </a>
-    </Box>
+        <Box mb={6}>
+            <a href="https://github.com/Arthur5502/MiniBank-Front.git" target="_blank">
+                <Image src={viteLogo} alt="MiniBank Logo" boxSize="80px" mx="auto" />
+            </a>
+        </Box>
 
-    <Heading size="2xl" mb={4}>
-        MiniBank
-    </Heading>
+        <Heading size="2xl" mb={4}>
+            MiniBank
+        </Heading>
 
-    <Box mt={6}>
-        <Button colorScheme="teal" size="lg" onClick={() => navigate('/login')}>
-            Login
-        </Button>
-
-        <Text fontSize="lg" mt={6}>
-            Welcome to our banking app! Here, you can manage your finances with ease.
+        <Text fontSize="lg" mb={8}>
+            Bem-vindo ao melhor banco digital!
         </Text>
-    </Box>
+
+        <Box display="flex" flexDirection="column" gap={4} alignItems="center">
+            <Button colorScheme="teal" size="lg" onClick={()=>navigate('/dashboard')}>
+                Acessar como cliente
+            </Button>
+            <Button colorScheme="purple" size="lg" onClick={()=>navigate('/login')}>
+                Acessar como Gerente
+            </Button>
+        </Box>
 
         <Text fontSize="sm" mt={10} opacity={0.6}>
-            Click on the MiniBank logo to learn more
+            Clique no logo do MiniBank para saber mais
         </Text>
+
     </Box>
     )
 }
