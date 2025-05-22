@@ -20,6 +20,7 @@ export default function Register() {
     const navigate = useNavigate()
     const [cpf, setCpf] = useState('')
     const [userType, setUserType] = useState<'cliente' | 'gerente'>('cliente')
+    const [focusedField, setFocusedField] = useState<string | null>(null)
 
     function formatCpf(value: string) {
         const onlyNums = value.replace(/\D/g, '')
@@ -33,6 +34,14 @@ export default function Register() {
     function handleCpfChange(e: React.ChangeEvent<HTMLInputElement>) {
         const value = e.target.value
         setCpf(formatCpf(value))
+    }
+
+    function handleFocus(fieldName: string) {
+        setFocusedField(fieldName)
+    }
+
+    function handleBlur() {
+        setFocusedField(null)
     }
 
     return (
@@ -87,33 +96,62 @@ export default function Register() {
                     </Heading>
 
                     <VStack spacing={4} align="stretch" w="100%" maxW="sm">
-                        <Select
-                            placeholder="Selecione o tipo de usuário"
-                            value={userType}
-                            onChange={(e) => setUserType(e.target.value as 'cliente' | 'gerente')}
-                            bg="gray.700"
-                            color="white"
+                        <Input
+                            placeholder="Nome Completo"
                             variant="filled"
-                        >
-                            <option value="cliente">Cliente</option>
-                            <option value="gerente">Gerente</option>
-                        </Select>
-
-                        <Input placeholder="Nome Completo" variant="filled" />
+                            focusBorderColor="#008000"
+                            _focus={{ borderColor: '#008000' }}
+                            _hover={{ borderColor: '#008000' }}
+                            color={focusedField === 'nome' ? 'white' : 'black'} // Alterar cor do texto conforme o foco
+                            onFocus={() => handleFocus('nome')} // Definir o foco para esse campo
+                            onBlur={handleBlur} // Remover o foco
+                        />
                         <Input
                             placeholder="CPF"
                             variant="filled"
                             value={cpf}
                             onChange={handleCpfChange}
                             maxLength={14}
+                            focusBorderColor="#008000"
+                            _focus={{ borderColor: '#008000' }}
+                            _hover={{ borderColor: '#008000' }}
+                            color={focusedField === 'cpf' ? 'white' : 'black'} // Alterar cor do texto conforme o foco
+                            onFocus={() => handleFocus('cpf')} // Definir o foco para esse campo
+                            onBlur={handleBlur} // Remover o foco
                         />
                         <Input
-                            placeholder="Data de Nascimento"
-                            type="date"
+                            placeholder="Endereço"
                             variant="filled"
+                            type="text"
+                            focusBorderColor="#008000"
+                            _focus={{ borderColor: '#008000' }}
+                            _hover={{ borderColor: '#008000' }}
+                            color={focusedField === 'endereco' ? 'white' : 'black'} // Alterar cor do texto conforme o foco
+                            onFocus={() => handleFocus('endereco')} // Definir o foco para esse campo
+                            onBlur={handleBlur} // Remover o foco
                         />
-                        <Input placeholder="Email" type="email" variant="filled" />
-                        <Input placeholder="Celular" type="tel" variant="filled" />
+                        <Input
+                            placeholder="Email"
+                            type="email"
+                            variant="filled"
+                            focusBorderColor="#008000"
+                            _focus={{ borderColor: '#008000' }}
+                            _hover={{ borderColor: '#008000' }}
+                            color={focusedField === 'email' ? 'white' : 'black'} // Alterar cor do texto conforme o foco
+                            onFocus={() => handleFocus('email')} // Definir o foco para esse campo
+                            onBlur={handleBlur} // Remover o foco
+                        />
+                        <Input
+                            placeholder="Celular"
+                            type="tel"
+                            variant="filled"
+                            focusBorderColor="#008000"
+                            _focus={{ borderColor: '#008000' }}
+                            _hover={{ borderColor: '#008000' }}
+                            color={focusedField === 'celular' ? 'white' : 'black'} // Alterar cor do texto conforme o foco
+                            onFocus={() => handleFocus('celular')} // Definir o foco para esse campo
+                            onBlur={handleBlur} // Remover o foco
+                        />
 
                         <Button
                             bg="#008000"

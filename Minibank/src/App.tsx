@@ -10,7 +10,7 @@ import Others from './pages/user/Others';
 import Payments from './pages/user/Payments';
 import Cards from './pages/user/Cards';
 import Lending from './pages/user/Lending';
-import CurrentAccount from './pages/user/CurrentAcconut';
+import Extract from './pages/user/ Extract';
 import LoanRequests from './pages/manager/LoanRequest';
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
       <Route path="/pagamentos" element={<Payments />} />
       <Route path="/cartoes" element={<Cards />} />
       <Route path="/emprestimos" element={<Lending />} />
-      <Route path="/conta" element={<CurrentAccount />} />
+      <Route path="/extrato" element={<Extract />} />
     </Routes>
   )
 }
