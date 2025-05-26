@@ -66,5 +66,4 @@ Siga os passos abaixo para configurar e executar o projeto em seu ambiente local
 
 ### 1. Clonando o Repositório
 ```bash
-git clone [https://github.com/SEU_USUARIO/NOME_DO_SEU_REPOSITORIO.git](https://github.com/SEU_USUARIO/NOME_DO_SEU_REPOSITORIO.git)
-cd NOME_DO_SEU_REPOSITORIO
+git clone (https://github.com/Arthur5502/MiniBank-Front.git)
