@@ -11,40 +11,43 @@ import {
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import { useFontSize } from '../../context/FontSizeContext'; // ajuste o caminho se necessário
 
+// Interface para a conta única
 interface AccountData {
-    label: string;
     balance: number;
 }
 
+// Interface para os cartões
 interface CardData {
     label: string;
     limit: number;
 }
 
+// Props atualizadas do componente
 interface StatusCardsProps {
-    selectedAccount: string;
-    accounts: AccountData[];
-    onSelectAccount: (value: string) => void;
-
+    account: AccountData;
     selectedCard: string;
     cards: CardData[];
     onSelectCard: (value: string) => void;
-
-    statusLabel: string;
 }
 
 const StatusCards = ({
-    selectedAccount,
-    accounts,
-    onSelectAccount,
+    account,
     selectedCard,
     cards,
     onSelectCard,
 }: StatusCardsProps) => {
-    const currentAccount = accounts.find((a) => a.label === selectedAccount);
+    // A busca pelo cartão continua igual
     const currentCard = cards.find((c) => c.label === selectedCard);
-
     const { fontSize } = useFontSize();
+
+    // --- CORREÇÃO ADICIONADA ---
+    // Esta verificação impede que o componente quebre se 'account' ou 'currentCard'
+    // forem indefinidos. Se os dados não estiverem prontos, ele não renderiza nada.
+    // Isso resolve o problema da tela em branco.
+    if (!account || !currentCard) {
+        return null;
+    }
+    // --- FIM DA CORREÇÃO ---
 
     return (
         <Flex
@@ -55,7 +58,7 @@ const StatusCards = ({
         >
             <Flex direction={{ base: 'column', md: 'row' }} flex="1" gap={4}>
 
-                {/* Conta bancária */}
+                {/* Card da Conta Corrente */}
                 <Box
                     flex="1"
                     bg="white"
@@ -68,33 +71,16 @@ const StatusCards = ({
                 >
                     <Flex justify="space-between" align="center" mb={1}>
                         <Text fontWeight="medium" fontSize={fontSize} color="gray.700">
-                            💰 {selectedAccount}
+                            💰 Conta Corrente
                         </Text>
-                        <Menu>
-                            <MenuButton
-                                as={Button}
-                                size="xs"
-                                variant="ghost"
-                                rightIcon={<ChevronDownIcon />}
-                                fontSize={fontSize}
-                                fontWeight="normal"
-                            />
-                            <MenuList>
-                                {accounts.map((acc, i) => (
-                                    <MenuItem key={i} onClick={() => onSelectAccount(acc.label)}>
-                                        {acc.label}
-                                    </MenuItem>
-                                ))}
-                            </MenuList>
-                        </Menu>
                     </Flex>
                     <Text fontSize="xs" color="gray.500">Saldo disponível:</Text>
                     <Text fontSize={fontSize} fontWeight="semibold" color="green.500">
-                        R$ {currentAccount?.balance.toFixed(2)}
+                        R$ {account.balance.toFixed(2)}
                     </Text>
                 </Box>
 
-                {/* Cartão */}
+                {/* Card do Cartão */}
                 <Box
                     flex="1"
                     bg="gray.900"
@@ -116,6 +102,8 @@ const StatusCards = ({
                                 size="xs"
                                 variant="ghost"
                                 color="whiteAlpha.800"
+                                _hover={{ bg: 'whiteAlpha.300' }}
+                                _active={{ bg: 'whiteAlpha.400' }}
                                 rightIcon={<ChevronDownIcon />}
                                 fontSize={fontSize}
                                 fontWeight="normal"
@@ -131,7 +119,10 @@ const StatusCards = ({
                     </Flex>
                     <Text fontSize="xs" color="whiteAlpha.700">Limite disponível:</Text>
                     <Text fontSize={fontSize} fontWeight="semibold" color="green.300">
-                        R$ {currentCard?.limit.toFixed(2)}
+                        {/* Como a verificação acima já garante que 'currentCard' existe,
+                            o '?' (optional chaining) não é mais estritamente necessário aqui,
+                            mas mantê-lo não causa problemas. */}
+                        R$ {currentCard.limit.toFixed(2)}
                     </Text>
                 </Box>
             </Flex>

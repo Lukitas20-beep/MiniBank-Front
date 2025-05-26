@@ -1,17 +1,10 @@
-import { Box, Flex, Heading, useDisclosure } from "@chakra-ui/react";
+import { Box, Flex, useDisclosure, Heading } from "@chakra-ui/react"; // 1. Importar o Heading
 import { useState } from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
-import AccountInfo from "../../components/dashboard/AccountInfo";
 import TransferForm from "../../components/transfer/TransferForm";
 
-const accounts = ["Conta Corrente - 1234", "Poupança - 5678"];
-
 const TransferPage = () => {
-    const name = "Arthur Campos";
-    const ag = "12345";
-    const ac = "56789-0";
-
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [formData, setFormData] = useState<{
         from: string;
@@ -44,7 +37,6 @@ const TransferPage = () => {
 
                 {/* Conteúdo principal */}
                 <Box ml={{ base: 0, md: "0" }} flex="1" px={{ base: 4, md: 8 }} py={6}>
-
                     <Flex
                         direction="column"
                         align="center"
@@ -52,14 +44,15 @@ const TransferPage = () => {
                         mt={{ base: 0, md: 10 }}
                         px={{ base: 4, sm: 6, md: 0 }}
                     >
-                        <Heading
-                            size="lg"
-                            mb={6}
-                            textAlign={{ base: "center", md: "left" }}
-                        >
+                        {/* --- TÍTULO ADICIONADO --- */}
+                        <Heading as="h1" size="lg" color="gray.700" mb={8}>
                             Realizar Transferência
                         </Heading>
-                        <TransferForm accounts={accounts} onTransfer={handleTransfer} />
+
+                        <TransferForm
+                            sourceAccount="Conta Corrente"
+                            onTransfer={handleTransfer}
+                        />
                     </Flex>
                 </Box>
             </Flex>

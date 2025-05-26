@@ -21,25 +21,23 @@ const Dashboard = () => {
     // Chakra menu disclosure
     const { isOpen, onOpen, onClose } = useDisclosure()
 
-    // Estados para seleção
+    // Estados para seleção de pagamento (mantidos)
     const [cardOption, setCardOption] = useState('pagar')
     const [paymentOption, setPaymentOption] = useState('atualizado')
     const [paymentDate, setPaymentDate] = useState('hoje')
 
-    const [selectedAccount, setSelectedAccount] = useState('Saldo disponível')
+    // --- CORREÇÃO 1: Dados da conta simplificados ---
+    // Em vez de uma lista, definimos apenas os dados da conta que queremos mostrar.
+    const contaCorrente = { balance: 800.00 };
+
+    // --- CORREÇÃO 2: Estados do cartão mantidos ---
+    // O estado para selecionar o cartão continua o mesmo.
     const [selectedCard, setSelectedCard] = useState('Cartão final 0000')
-    const [statusLabel] = useState('Preenchimento')
-
-    const accounts = [
-        { label: 'Saldo disponível', balance: 1542.75 },
-        { label: 'Conta Corrente', balance: 800.00 },
-        { label: 'Conta Poupança', balance: 1200.50 },
-    ]
-
     const cards = [
         { label: 'Cartão final 0000', limit: 2000.00 },
         { label: 'Cartão final 1234', limit: 1500.00 },
     ]
+    // O state 'selectedAccount' foi removido por não ser mais necessário.
 
     return (
         <Box minH="100vh" bg="gray.50">
@@ -61,14 +59,13 @@ const Dashboard = () => {
                         flexWrap="wrap"
                         justifyContent="space-between"
                     >
+                        {/* --- CORREÇÃO 3: Chamada do StatusCards atualizada --- */}
                         <StatusCards
-                            selectedAccount={selectedAccount}
-                            accounts={accounts}
-                            onSelectAccount={setSelectedAccount}
+                            account={contaCorrente} // Passando o objeto único da conta
                             selectedCard={selectedCard}
                             cards={cards}
                             onSelectCard={setSelectedCard}
-                            statusLabel={statusLabel}
+                            // As props 'accounts', 'onSelectAccount' e 'statusLabel' foram removidas
                         />
                     </Flex>
 

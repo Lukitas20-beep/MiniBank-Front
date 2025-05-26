@@ -4,7 +4,6 @@ import {
     FormControl,
     FormLabel,
     Input,
-    Select,
     Textarea,
     VStack,
     useToast,
@@ -17,8 +16,10 @@ import { useState } from "react";
 import { MdSwapHoriz } from "react-icons/md";
 import { useFontSize } from "../../context/FontSizeContext";
 
+// --- CORREÇÃO 1: Props Simplificadas ---
+// Removemos 'accounts' e adicionamos 'sourceAccount' para saber qual é a conta de origem.
 interface TransferFormProps {
-    accounts: string[];
+    sourceAccount: string; // Ex: "Conta Corrente"
     onTransfer: (data: {
         from: string;
         to: string;
@@ -27,8 +28,9 @@ interface TransferFormProps {
     }) => void;
 }
 
-const TransferForm = ({ accounts, onTransfer }: TransferFormProps) => {
-    const [from, setFrom] = useState("");
+const TransferForm = ({ sourceAccount, onTransfer }: TransferFormProps) => {
+    // --- CORREÇÃO 2: Estado Simplificado ---
+    // O estado 'from' foi removido, pois a conta de origem é fixa.
     const [to, setTo] = useState("");
     const [amount, setAmount] = useState("");
     const [description, setDescription] = useState("");
@@ -36,9 +38,10 @@ const TransferForm = ({ accounts, onTransfer }: TransferFormProps) => {
     const { fontSize } = useFontSize();
 
     const handleSubmit = () => {
-        if (!from || !to || !amount) {
+        // A validação para 'from' foi removida.
+        if (!to || !amount) {
             toast({
-                title: "Preencha todos os campos obrigatórios.",
+                title: "Preencha a conta de destino e o valor.",
                 status: "warning",
                 duration: 3000,
                 isClosable: true,
@@ -47,7 +50,7 @@ const TransferForm = ({ accounts, onTransfer }: TransferFormProps) => {
         }
 
         onTransfer({
-            from,
+            from: sourceAccount, // Usamos a prop 'sourceAccount' diretamente.
             to,
             amount: parseFloat(amount),
             description,
@@ -60,7 +63,7 @@ const TransferForm = ({ accounts, onTransfer }: TransferFormProps) => {
             isClosable: true,
         });
 
-        setFrom("");
+        // O 'setFrom' foi removido.
         setTo("");
         setAmount("");
         setDescription("");
@@ -89,26 +92,28 @@ const TransferForm = ({ accounts, onTransfer }: TransferFormProps) => {
                     </Heading>
                 </Flex>
 
-                <FormControl isRequired>
-                    <FormLabel fontSize={fontSize}>Conta de origem</FormLabel>
-                    <Select
-                        value={from}
-                        onChange={(e) => setFrom(e.target.value)}
-                        fontSize={fontSize}
-                        placeholder="Selecione a conta"
+                {/* --- CORREÇÃO 3: Campo de Origem Fixo --- */}
+                {/* Trocamos o <Select> por um campo de texto estático. */}
+                <FormControl>
+                    <FormLabel fontSize={fontSize}>Saindo da conta</FormLabel>
+                    <Flex
+                        borderWidth="1px"
+                        borderColor="gray.200"
+                        bg="gray.50"
+                        px={4}
+                        py={2}
+                        rounded="md"
                     >
-                        {accounts.map((acc, i) => (
-                            <option key={i} value={acc}>
-                                {acc}
-                            </option>
-                        ))}
-                    </Select>
+                        <Text fontSize={fontSize} color="gray.600" fontWeight="medium">
+                            {sourceAccount}
+                        </Text>
+                    </Flex>
                 </FormControl>
 
                 <FormControl isRequired>
-                    <FormLabel fontSize={fontSize}>Conta de destino</FormLabel>
+                    <FormLabel fontSize={fontSize}>Enviando para (CPF/CNPJ)</FormLabel>
                     <Input
-                        placeholder="Informe o número da conta"
+                        placeholder="Informe o CPF ou CNPJ de destino"
                         value={to}
                         onChange={(e) => setTo(e.target.value)}
                         fontSize={fontSize}
@@ -116,10 +121,10 @@ const TransferForm = ({ accounts, onTransfer }: TransferFormProps) => {
                 </FormControl>
 
                 <FormControl isRequired>
-                    <FormLabel fontSize={fontSize}>Valor</FormLabel>
+                    <FormLabel fontSize={fontSize}>Valor da transferência</FormLabel>
                     <Input
                         type="number"
-                        placeholder="Ex: 100.00"
+                        placeholder="R$ 0,00"
                         value={amount}
                         onChange={(e) => setAmount(e.target.value)}
                         fontSize={fontSize}
@@ -129,7 +134,7 @@ const TransferForm = ({ accounts, onTransfer }: TransferFormProps) => {
                 <FormControl>
                     <FormLabel fontSize={fontSize}>Descrição (opcional)</FormLabel>
                     <Textarea
-                        placeholder="Ex: pagamento de aluguel"
+                        placeholder="Ex: Pagamento da fatura"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         fontSize={fontSize}
