@@ -5,11 +5,11 @@ Este é um projeto de um Banco Digital completo, desenvolvido para demonstrar a 
 ✨ Funcionalidades Principais
 O sistema é dividido em dois perfis principais, cada um com seu conjunto de funcionalidades:
 
-👤 Para Clientes
+👤 Para Clientes:
 
 Autenticação Segura: Login para acesso à conta pessoal.
 
-Cadastro de Novo Usuário: Permite que novos clientes criem suas contas.
+Cadastro de Novo Usuário: Permite que novos clientes criem as suas contas.
 
 Dashboard do Cliente: Visualização de saldo, informações da conta e atalhos para operações.
 
@@ -19,34 +19,34 @@ Visualizar Extratos: Acesso ao histórico detalhado de todas as transações (en
 
 Solicitar Empréstimos: Funcionalidade para clientes solicitarem análises de crédito e empréstimos.
 
-💼 Para Gerentes
+💼 Para Gerentes:
 
 Autenticação Segura: Login para acesso ao painel de gerenciamento.
 
 Dashboard Gerencial: Visão geral das atividades do banco, como número de clientes, total de empréstimos solicitados, etc.
 
-Visualizar Usuários Cadastrados: Listagem de todos os clientes registrados na plataforma, com possibilidade de visualizar detalhes.
+Visualizar Usuários Cadastrados: Listagem de todos os clientes registados na plataforma, com possibilidade de visualizar detalhes.
 
 Gerenciar Pedidos de Empréstimos: Acesso aos pedidos de empréstimos feitos pelos clientes para análise, aprovação ou recusa.
 
 🛠️ Tecnologias Utilizadas
 Este projeto foi construído utilizando um stack moderno e robusto:
 
-💻 Front-end
+💻 Front-end:
 
-React (v18+): Biblioteca JavaScript para a construção de interfaces de usuário componentizadas e reativas.
+React (v18+): Biblioteca JavaScript para a construção de interfaces de utilizador componentizadas e reativas.
 
 TypeScript (v5+): Superset do JavaScript que adiciona tipagem estática, aumentando a robustez e a manutenibilidade do código.
 
-Chakra UI: Biblioteca de componentes UI que oferece blocos de construção acessíveis, modulares e customizáveis para acelerar o desenvolvimento.
+Chakra UI: Biblioteca de componentes UI que oferece blocos de construção acessíveis, modulares e personalizáveis para acelerar o desenvolvimento.
 
 Axios: Cliente HTTP baseado em Promises para realizar requisições à API do back-end.
 
 React Router DOM: Para gerenciamento de rotas na aplicação single-page.
 
-⚙️ Back-end
+⚙️ Back-end:
 
-Java (v17+): Linguagem de programação principal, conhecida por sua performance e ecossistema maduro.
+Java (v17+): Linguagem de programação principal, conhecida pela sua performance e ecossistema maduro.
 
 Spring Boot (v3+): Framework que simplifica a criação de aplicações Java stand-alone e prontas para produção.
 
@@ -59,28 +59,28 @@ Maven/Gradle: Gerenciador de dependências e ferramenta de build para o projeto 
 Banco de Dados Relacional (Ex: PostgreSQL, MySQL, H2): Para armazenamento persistente dos dados da aplicação.
 
 🚀 Como Executar o Projeto Localmente
-Siga os passos abaixo para configurar e executar o projeto em seu ambiente de desenvolvimento.
+Siga os passos abaixo para configurar e executar o projeto no seu ambiente de desenvolvimento.
 
-Pré-requisitos
+Pré-requisitos:
 
 Git instalado.
 
-Java JDK 17 (ou superior) instalado e configurado.
+Java JDK 17 (ou superior) instalado e configurado (variável de ambiente JAVA_HOME definida).
 
-Maven (v3.8+) ou Gradle (v7.5+) instalado e configurado.
+Maven (v3.8+) ou Gradle (v7.5+) instalado e configurado (adicionado ao PATH do sistema).
 
 Node.js v18 (ou superior) e npm (ou yarn) instalados.
 
-Uma instância de um banco de dados relacional (ex: PostgreSQL) rodando e acessível, ou configure o projeto para usar um banco em memória como o H2 para desenvolvimento.
+Uma instância de um banco de dados relacional (ex: PostgreSQL) a rodar e acessível, ou configure o projeto para usar um banco em memória como o H2 para desenvolvimento.
 
-1. Clonando o Repositório
+1. Clonando o Repositório:
 
 git clone [https://github.com/SEU_USUARIO/NOME_DO_SEU_REPOSITORIO.git](https://github.com/SEU_USUARIO/NOME_DO_SEU_REPOSITORIO.git)
 cd NOME_DO_SEU_REPOSITORIO
 
-2. Configurando e Executando o Back-end (Java + Spring Boot)
+2. Configurando e Executando o Back-end (Java + Spring Boot):
 
-# Navegue até a pasta do back-end (ex: /backend)
+# Navegue até à pasta do back-end (ex: /backend)
 cd backend
 
 # Configure as propriedades do banco de dados no arquivo:
@@ -97,12 +97,12 @@ cd backend
 # Usando Gradle:
 ./gradlew bootRun
 
-# O servidor back-end estará rodando, por padrão, em http://localhost:8080
+# O servidor back-end estará a rodar, por padrão, em http://localhost:8080
 
-3. Configurando e Executando o Front-end (React + TypeScript)
+3. Configurando e Executando o Front-end (React + TypeScript):
 
-# Em um novo terminal, navegue até a pasta do front-end (ex: /frontend)
-cd ../frontend # ou o caminho correto para sua pasta frontend
+# Num novo terminal, navegue até à pasta do front-end (ex: /frontend)
+cd ../frontend # ou o caminho correto para a sua pasta frontend
 
 # Instale as dependências do projeto
 npm install
@@ -121,7 +121,7 @@ yarn start
 
 # A aplicação front-end estará acessível, por padrão, em http://localhost:3000
 
-Após esses passos, você deverá conseguir acessar a aplicação no seu navegador e testar as funcionalidades.
+Após esses passos, deverá conseguir aceder à aplicação no seu navegador e testar as funcionalidades.
 
 🗺️ Estrutura de Endpoints da API (Exemplos)
 Abaixo alguns exemplos de endpoints que podem existir na API RESTful do back-end:
@@ -138,7 +138,7 @@ POST
 
 /auth/login
 
-Autentica um usuário ou gerente.
+Autentica um utilizador ou gerente.
 
 Não
 
@@ -186,7 +186,7 @@ GET
 
 /api/gerente/usuarios
 
-(Gerente) Lista todos os usuários cadastrados.
+(Gerente) Lista todos os utilizadores cadastrados.
 
 Sim (Gerente)
 
@@ -209,13 +209,13 @@ Sim (Gerente)
 Adapte os endpoints conforme a estrutura real da sua API.
 
 🤝 Como Contribuir
-Contribuições são o que tornam a comunidade open source um lugar incrível para aprender, inspirar e criar. Qualquer contribuição que você fizer será muito apreciada.
+Contribuições são o que tornam a comunidade open source um lugar incrível para aprender, inspirar e criar. Qualquer contribuição que fizer será muito apreciada.
 
 Faça um Fork do projeto.
 
-Crie uma Branch para sua Feature (git checkout -b feature/MinhaNovaFeature).
+Crie uma Branch para a sua Feature (git checkout -b feature/MinhaNovaFeature).
 
-Faça o Commit de suas mudanças (git commit -m 'Adicionando MinhaNovaFeature').
+Faça o Commit das suas mudanças (git commit -m 'Adicionando MinhaNovaFeature').
 
 Faça o Push para a Branch (git push origin feature/MinhaNovaFeature).
 
@@ -224,6 +224,5 @@ Abra um Pull Request.
 📄 Licença
 Distribuído sob a Licença MIT. Veja LICENSE.txt para mais informações.
 
-Desenvolvido com ❤️ por [Seu Nome/Nome da Equipe]
-
+Desenvolvido com ❤️ por [Seu Nome/Nome da Equipa]
 
