@@ -1,17 +1,11 @@
 import { Box, Flex, useDisclosure, Heading } from "@chakra-ui/react"; // 1. Importar o Heading
-import { useState } from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import TransferForm from "../../components/transfer/TransferForm";
 
 const TransferPage = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [formData, setFormData] = useState<{
-        from: string;
-        to: string;
-        amount: number;
-        description: string;
-    } | null>(null);
+    // Removido o estado formData pois não estava sendo utilizado
 
     const handleTransfer = (data: {
         from: string;
@@ -20,13 +14,12 @@ const TransferPage = () => {
         description: string;
     }) => {
         console.log("Transferência enviada:", data);
-        setFormData(data);
         // Aqui você pode enviar para a API ou backend
     };
 
     return (
-        <Box minH="100vh" bg="gray.50">
-            {/* Header fixo */}
+        <>
+            {/* Aqui você pode enviar para a API ou backend */}
             <Box position="fixed" top="0" left="0" right="0" zIndex="1000">
                 <Header onOpenMenu={onOpen} />
             </Box>
@@ -56,7 +49,7 @@ const TransferPage = () => {
                     </Flex>
                 </Box>
             </Flex>
-        </Box>
+        </>
     );
 };
 
