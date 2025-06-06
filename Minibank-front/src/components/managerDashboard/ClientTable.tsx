@@ -21,20 +21,13 @@ interface ClientTableProps {
     onClientUpdated?: (updatedClient: Cliente, index: number) => void; // Callback para notificar a atualização
 }
 
-export default function ClientTable({ clientes: initialClientes, onClientUpdated }: ClientTableProps) {
+export default function ClientTable({ clientes: initialClientes}: ClientTableProps) {
     const isMobile = useBreakpointValue({ base: true, md: false }) ?? false;
     const [clientes, setClientes] = useState<Cliente[]>(initialClientes);
 
     useEffect(() => {
         setClientes(initialClientes); // Mantém o estado de clientes sincronizado com as props
     }, [initialClientes]);
-
-    const atualizarCliente = (index: number, novoCliente: Cliente) => {
-        const novosClientes = [...clientes];
-        novosClientes[index] = novoCliente;
-        setClientes(novosClientes);
-        onClientUpdated?.(novoCliente, index); // Chama o callback se fornecido
-    };
 
     if (isMobile) {
         return (

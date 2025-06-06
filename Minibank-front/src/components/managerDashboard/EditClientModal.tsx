@@ -48,7 +48,7 @@ export function EditClientModal({ cliente, onCloseModal }: EditClientModalProps)
                 />
             </Tooltip>
 
-            <Modal isOpen={isOpen} onClose={onClose}>
+            <Modal isOpen={isOpen} onClose={() => { onClose(); onCloseModal(); }}>
                 <ModalOverlay />
                 <ModalContent maxW="md">
                     <ModalHeader fontWeight="semibold" fontSize="lg">
@@ -77,7 +77,7 @@ export function EditClientModal({ cliente, onCloseModal }: EditClientModalProps)
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button onClick={onClose}>
+                        <Button onClick={() => { onClose(); onCloseModal(); }}>
                             Fechar
                         </Button>
                     </ModalFooter>
