@@ -67,7 +67,7 @@ const SidebarItem = ({ icon, label, path, onClick }: SidebarItemProps) => {
 
 const SidebarContent = ({ onClose }: { onClose?: () => void }) => (
     <Box
-        w={{ base: '60vw', md: '22vh' }} // Largura ajustada para 60vw no modo base (mobile) - REVERTIDO PARA O VALOR ANTERIOR
+        w={{ base: '60vw', md: '25vh' }} // Largura ajustada para 60vw no modo base (mobile) - REVERTIDO PARA O VALOR ANTERIOR
         bg="gray.50"
         py={6}
         px={4} // Aumenta o padding horizontal

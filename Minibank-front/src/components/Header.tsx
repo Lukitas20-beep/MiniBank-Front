@@ -54,7 +54,7 @@ const Header = ({ onOpenMenu }: HeaderProps) => {
                 flex={isMobile ? '1' : '0'}
                 textAlign={isMobile ? 'center' : 'left'}
                 cursor="pointer"
-                onClick={() => navigate('/login')}
+                onClick={() => navigate('/dashboard')}
             >
                 <Text fontSize="2xl" fontWeight="bold">
                     <Text as="span" color="white">Mini</Text>

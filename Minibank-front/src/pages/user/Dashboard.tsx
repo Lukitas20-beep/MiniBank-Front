@@ -28,7 +28,7 @@ const Dashboard = () => {
 
     // --- CORREÇÃO 1: Dados da conta simplificados ---
     // Em vez de uma lista, definimos apenas os dados da conta que queremos mostrar.
-    const contaCorrente = { balance: 800.00 };
+    const contaCorrente = { balance: 50.00 };
 
     // --- CORREÇÃO 2: Estados do cartão mantidos ---
     // O estado para selecionar o cartão continua o mesmo.

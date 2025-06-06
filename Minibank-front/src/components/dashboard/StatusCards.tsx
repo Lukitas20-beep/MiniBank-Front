@@ -9,22 +9,20 @@ import {
     Button,
 } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
-import { useFontSize } from '../../context/FontSizeContext'; // ajuste o caminho se necessário
+import { useFontSize } from '../../context/FontSizeContext';
 
-// Interface para a conta única
 interface AccountData {
     balance: number;
 }
 
-// Interface para os cartões
 interface CardData {
     label: string;
     limit: number;
 }
 
-// Props atualizadas do componente
 interface StatusCardsProps {
     account: AccountData;
+    accountIdentifier?: string; // Nova prop: opcional, para o número/rótulo da conta
     selectedCard: string;
     cards: CardData[];
     onSelectCard: (value: string) => void;
@@ -32,22 +30,17 @@ interface StatusCardsProps {
 
 const StatusCards = ({
     account,
+    accountIdentifier, // Usar a nova prop
     selectedCard,
     cards,
     onSelectCard,
 }: StatusCardsProps) => {
-    // A busca pelo cartão continua igual
     const currentCard = cards.find((c) => c.label === selectedCard);
     const { fontSize } = useFontSize();
 
-    // --- CORREÇÃO ADICIONADA ---
-    // Esta verificação impede que o componente quebre se 'account' ou 'currentCard'
-    // forem indefinidos. Se os dados não estiverem prontos, ele não renderiza nada.
-    // Isso resolve o problema da tela em branco.
     if (!account || !currentCard) {
         return null;
     }
-    // --- FIM DA CORREÇÃO ---
 
     return (
         <Flex
@@ -57,8 +50,6 @@ const StatusCards = ({
             wrap="wrap"
         >
             <Flex direction={{ base: 'column', md: 'row' }} flex="1" gap={4}>
-
-                {/* Card da Conta Corrente */}
                 <Box
                     flex="1"
                     bg="white"
@@ -71,7 +62,8 @@ const StatusCards = ({
                 >
                     <Flex justify="space-between" align="center" mb={1}>
                         <Text fontWeight="medium" fontSize={fontSize} color="gray.700">
-                            💰 Conta Corrente
+                            {/* Usa o identificador se fornecido, senão usa "Conta Corrente" */}
+                            💰 {accountIdentifier || 'Conta Corrente'}
                         </Text>
                     </Flex>
                     <Text fontSize="xs" color="gray.500">Saldo disponível:</Text>
@@ -80,7 +72,7 @@ const StatusCards = ({
                     </Text>
                 </Box>
 
-                {/* Card do Cartão */}
+                {/* Card do Cartão (sem alterações) */}
                 <Box
                     flex="1"
                     bg="gray.900"
@@ -119,9 +111,6 @@ const StatusCards = ({
                     </Flex>
                     <Text fontSize="xs" color="whiteAlpha.700">Limite disponível:</Text>
                     <Text fontSize={fontSize} fontWeight="semibold" color="green.300">
-                        {/* Como a verificação acima já garante que 'currentCard' existe,
-                            o '?' (optional chaining) não é mais estritamente necessário aqui,
-                            mas mantê-lo não causa problemas. */}
                         R$ {currentCard.limit.toFixed(2)}
                     </Text>
                 </Box>
