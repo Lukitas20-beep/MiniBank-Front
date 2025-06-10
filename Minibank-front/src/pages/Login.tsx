@@ -91,7 +91,7 @@ export default function Login() {
         try {
             // A chamada para a API permanece a mesma
             const response = await axios.get(
-                'http://18.230.232.119:8081/login',
+                'https://18.230.232.119:8081/login',
                 {
                     auth: {
                         username: usernameForAuth,

@@ -48,7 +48,7 @@ export default function Register() {
             // =======================================================================
             // ALTERAÇÃO PRINCIPAL AQUI: A URL FOI ATUALIZADA
             // =======================================================================
-            await axios.post('http://18.230.232.119:8081/create', {
+            await axios.post('https://18.230.232.119:8081/create', {
                 nome, cpf: cpfOnlyNumbers, endereco, email, senha
             });
 
