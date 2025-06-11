@@ -68,7 +68,7 @@ export default function Register() {
             setIsLoading(false);
         }
     }
-    
+
     // Funções de UI mantidas
     function formatCpf(value: string) {
         const onlyNums = value.replace(/\D/g, '');
@@ -89,7 +89,7 @@ export default function Register() {
     function handleBlur() {
         setFocusedField(null);
     }
-    
+
     return (
         <Flex
             minH="100vh"
